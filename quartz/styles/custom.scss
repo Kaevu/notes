@@ -1,3 +1,96 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// Faint paper grain over the whole page
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.25;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.4  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+:root[saved-theme="dark"] body::before {
+  opacity: 0.2;
+}
+
+#quartz-root, .page { position: relative; z-index: 1; }
+
+// Headings: soft serif, italic on the page title
+h1, h2, h3, h4 {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+h1.article-title {
+  font-style: italic;
+  font-family: "Fraunces", serif;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  margin-bottom: 0.4em;
+}
+.page-title {
+  font-family: var(--headerFont);
+  font-style: italic;
+  font-weight: 400;
+}
+
+// Body text with a bit more air
+article p, article li {
+  line-height: 1.75;
+}
+
+// Links: thin underline instead of a color block
+a.internal {
+  background: none;
+  color: var(--secondary);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 40%, transparent);
+  transition: text-decoration-color 0.2s;
+  &:hover { text-decoration-color: var(--secondary); }
+}
+
+// Hairline rules and quiet blockquotes
+hr { border: none; border-top: 1px solid var(--lightgray); margin: 2.5rem 0; }
+blockquote {
+  border-left: 1px solid var(--secondary);
+  font-family: var(--headerFont);
+  font-style: italic;
+  color: var(--darkgray);
+}
+
+// Soften popovers, code blocks, and the graph
+.popover .popover-inner,
+pre {
+  border-radius: 2px;
+  box-shadow: 0 8px 30px rgba(46, 33, 19, 0.10);
+  border: 1px solid var(--lightgray);
+}
+.graph > .graph-outer {
+  border-radius: 2px;
+  border: 1px solid var(--lightgray);
+}
+
+// Tags as small outlined labels
+a.tag-link {
+  background: none;
+  border: 1px solid var(--lightgray);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+  color: var(--darkgray);
+  &:hover { border-color: var(--secondary); color: var(--secondary); }
+}
+.left.sidebar .page-title::before {
+  content: "";
+  display: block;
+  width: 280px;
+  height: 204px;
+  margin-bottom: 12px;
+  background-image: url("/static/logo.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+}
