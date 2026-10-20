@@ -236,7 +236,12 @@ plugins:
       position: footer
       priority: 50
   - source: "@quartz-community/recent-notes"
-    enabled: false
+    enabled: true
+    hideFolderPages: true
+    layout:
+      position: right
+      priority: 20
+      display: all
   - source: "@quartz-community/spacer"
     enabled: true
     options: {}
@@ -273,6 +278,18 @@ plugins:
       darkMode: auto
       exportPadding: 20
     order: 50
+  - source: github:quartz-community/recent-notes
+    enabled: false
+    options:
+      limit: 3
+      linkToMore: false
+      showTags: true
+      hideTagPages: false
+      hideFolderPages: false
+    order: 50
+    layout:
+      position: afterBody
+      priority: 50
 layout:
   groups:
     toolbar:
